@@ -9,20 +9,28 @@ nav_order: 6
 profiles:
   # if you want to include more than one profile, just replicate the following block
   # and create one content file for each profile inside _pages/
-  - align: right
-    image: prof_pic.jpg
-    content: about_einstein.md
-    image_circular: false # crops the image to make it circular
-    more_info: >
-      <p>555 your office number</p>
-      <p>123 your address street</p>
-      <p>Your City, State 12345</p>
   - align: left
-    image: prof_pic.jpg
-    content: about_einstein.md
-    image_circular: false # crops the image to make it circular
+    image: usman.jpg
+    content: about_usman.md
+    image_circular: true # crops the image to make it circular
     more_info: >
-      <p>555 your office number</p>
-      <p>123 your address street</p>
-      <p>Your City, State 12345</p>
+      <p>Allied Consultants</p>
+      <p>31 C, Abdallian Housing Society</p>
+      <p>Lahore, Punjab 54600</p>
+  - align: left
+    image: luqman.jpg
+    content: about_luqman.md
+    image_circular: true # crops the image to make it circular
+    more_info: >
+      <p>Allied Consultants</p>
+      <p>31 C, Abdallian Housing Society</p>
+      <p>Lahore, Punjab 54600</p>
+  - align: left
+    image: zuhaib.png
+    content: about_zuhaib.md
+    image_circular: true # crops the image to make it circular
+    more_info: >
+      <p>Allied Consultants</p>
+      <p>31 C, Abdallian Housing Society</p>
+      <p>Lahore, Punjab 54600</p>
 ---
