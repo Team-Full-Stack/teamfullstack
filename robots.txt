@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://blog.teamfullstack.io//teamfullstack//sitemap.xml
+Sitemap: https://blog.teamfullstack.io//sitemap.xml
