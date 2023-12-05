@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://usman-jamil.github.io/sitemap.xml
+Sitemap: https://usman-jamil.github.io/teamfullstack//sitemap.xml
