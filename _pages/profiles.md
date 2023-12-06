@@ -26,7 +26,7 @@ profiles:
       <p>31 C, Abdallian Housing Society</p>
       <p>Lahore, Punjab 54600</p>
   - align: left
-    image: zuhaib.png
+    image: zuhaib.jpg
     content: about_zuhaib.md
     image_circular: true # crops the image to make it circular
     more_info: >

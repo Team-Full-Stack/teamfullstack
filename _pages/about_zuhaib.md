@@ -1,1 +1,1 @@
-Zuhaib Sohail
+The name's `Zuhaib Sohail`. Main hobby <mark>playing games</mark>. Curious about things that interest me. Main goal is to become Professional software Engineer.
