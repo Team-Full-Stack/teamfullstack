@@ -12,7 +12,7 @@ authors:
     url: "https://github.com/usman-jamil"
     affiliations:
       name: Allied Consultants
-  - name:  SheikhLuqman
+  - name:  Sheikh Luqman
     url: "https://en.wikipedia.org/wiki/Boris_Podolsky"
     affiliations:
       name: Allied Consultants
@@ -21,7 +21,7 @@ authors:
     affiliations:
       name: Allied Consultants
 
-bibliography: 2018-12-22-krazzy.bib
+bibliography: krazzy-adventures.bib
 
 # Optionally, you can add a table of contents to your post.
 # NOTES:
@@ -31,13 +31,37 @@ bibliography: 2018-12-22-krazzy.bib
 #     jekyll-toc plugin (https://github.com/toshimaru/jekyll-toc).
 toc:
   - name: Admin portal
+    subsections:
+      - name: Users
+      - name: Events
+        subsections:
+          - name: Create Event
+          - name: All Event
+          - name: Published Event
+          - name: Book Event
+      - name: Images
+        subsections:
+          - name: Upload Images
+          - name: All Images
     # if a section has subsections, you can add them as follows:
     # subsections:
     #   - name: Example Child Subsection 1
     #   - name: Example Child Subsection 2
   - name: Homepage
+    subsections:
+      - name: Sections
+        subsections:
+          - name: Highlights
+          - name: Admins
   - name: Events
+    subsections:
+      - name: Categories
+      - name: Single Event
+      - name: Event Details
   - name: Contact Us
+    subsections:
+      - name: Contact Us form
+      - name: FAQ
   - name: Privacy Policy
   - name: Terms & Conditions
   - name: Footer
@@ -45,6 +69,10 @@ toc:
 # Below is an example of injecting additional post-specific styles.
 # If you use this post as a template, delete this _styles block.
 _styles: >
+  .toc {
+    position: -webkit-sticky;
+    position: sticky;
+  }
   .fake-img {
     background: #bbb;
     border: 1px solid rgba(0, 0, 0, 0.1);
