@@ -6,6 +6,14 @@ description: members of the lab or group
 nav: true
 nav_order: 6
 
+_styles: >
+  .profiles .image {
+    overflow: hidden;
+  width: 216px;
+  height: 217px;
+  }
+
+
 profiles:
   # if you want to include more than one profile, just replicate the following block
   # and create one content file for each profile inside _pages/
