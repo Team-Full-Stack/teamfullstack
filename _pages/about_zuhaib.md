@@ -1,1 +1,1 @@
-The name's `Zuhaib Sohail`. Main hobby <mark>playing games</mark>. Curious about things that interest me. Main goal is to become Professional software Engineer.
+The name's `Zuhaib Sohail`. Main hobby <mark>playing video games</mark>. Curious about things that interest me. Main goal is to become a professional software engineer.
