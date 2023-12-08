@@ -14,6 +14,7 @@ profiles:
     content: about_usman.md
     image_circular: true # crops the image to make it circular
     more_info: >
+      <p>Software Engineer</p>
       <p>Allied Consultants</p>
       <p>31 C, Abdallian Housing Society</p>
       <p>Lahore, Punjab 54600</p>
@@ -22,6 +23,7 @@ profiles:
     content: about_luqman.md
     image_circular: true # crops the image to make it circular
     more_info: >
+      <p>Software Engineer</p>
       <p>Allied Consultants</p>
       <p>31 C, Abdallian Housing Society</p>
       <p>Lahore, Punjab 54600</p>
@@ -30,6 +32,7 @@ profiles:
     content: about_zuhaib.md
     image_circular: true # crops the image to make it circular
     more_info: >
+      <p>Software Engineer</p>
       <p>Allied Consultants</p>
       <p>31 C, Abdallian Housing Society</p>
       <p>Lahore, Punjab 54600</p>
