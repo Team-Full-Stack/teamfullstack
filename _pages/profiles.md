@@ -6,6 +6,14 @@ description: members of the lab or group
 nav: true
 nav_order: 6
 
+_styles: >
+  .profiles .image {
+    overflow: hidden;
+  width: 216px;
+  height: 217px;
+  }
+
+
 profiles:
   # if you want to include more than one profile, just replicate the following block
   # and create one content file for each profile inside _pages/
@@ -31,6 +39,7 @@ profiles:
     image: zuhaib.jpg
     content: about_zuhaib.md
     image_circular: true # crops the image to make it circular
+    # <p style="color:red;">Software Engineer</p>
     more_info: >
       <p>Software Engineer</p>
       <p>Allied Consultants</p>
