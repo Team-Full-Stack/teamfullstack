@@ -39,6 +39,7 @@ profiles:
     image: zuhaib.jpg
     content: about_zuhaib.md
     image_circular: true # crops the image to make it circular
+    # <p style="color:red;">Software Engineer</p>
     more_info: >
       <p>Software Engineer</p>
       <p>Allied Consultants</p>
