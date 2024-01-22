@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Deploying keycloak on bare metal with https
+title: Deploying a dev/test keycloak environment
 date: 2024-01-22
 description: Keycloak, Postgres and lets-encrypt for TLS
 tags: keycloak docker lets-encrypt
-categories: identity
+categories: identity-as-a-service
 giscus_comments: true
-related_posts: true
+related_posts: false
 
 authors:
   - name: Usman Jamil Bhatti
@@ -16,12 +16,11 @@ authors:
 
 ---
 
-We are going to deploy a keycloak development server on a virtual machine. This article is based on [Johannes Reppin's](https://gitlab.desy.de/johannes.reppin/keycloak-docker-compose) implementation. The basic steps are all mentioned in the README file of the mentioned repository. However, a few key steps are worth mentioning.
+We are going to deploy a keycloak development server on a virtual machine. This article is based on [Johannes Reppin's](https://gitlab.desy.de/johannes.reppin/keycloak-docker-compose) implementation. The basic steps are all mentioned in the README file of this repository. However, a few key steps are worth mentioning.
 
-Our identity has been deployed to a virtual machine that has been hosted in GCP. 
-You just need to create an `A` type record in your DNS settings that point the subdomain to the external IP of the virtual machine. Thats's it.
+Our identity server has been deployed to a virtual machine that has been hosted in GCP. For your subdomain you just need to create an `A` type record in your DNS settings that point the subdomain to the external IP of the virtual machine. Thats's it!
 
-The rest that you need to do is pretty much mentioned in the mentioned repository. Once you have completed those steps, navigate to your repository dir on your machine and run the following commands
+The initial steps are all in the [Blog](https://gitlab.desy.de/johannes.reppin/keycloak-docker-compose) and [this Plural Sight](https://app.pluralsight.com/library/courses/keycloak-getting-started/table-of-contents) course. Once you have completed the steps, clone the repo, navigate to the repository dir on your machine and run the following commands
 
 ```bash
 $ docker compose pull
