@@ -1,13 +1,21 @@
 ---
 layout: post
 title: Deploying keycloak on bare metal with https
-date: 2024-01-22 12:00:00-0500
+date: 2024-01-22
 description: Keycloak, Postgres and lets-encrypt for TLS
 tags: keycloak docker lets-encrypt
 categories: identity
 giscus_comments: true
 related_posts: true
+
+authors:
+  - name: Usman Jamil Bhatti
+    url: "https://github.com/usman-jamil"
+    affiliations:
+      name: Allied Consultants
+
 ---
+
 We are going to deploy a keycloak development server on a virtual machine. This article is based on [Johannes Reppin's](https://gitlab.desy.de/johannes.reppin/keycloak-docker-compose) implementation. The basic steps are all mentioned in the README file of the mentioned repository. However, a few key steps are worth mentioning.
 
 Our identity has been deployed to a virtual machine that has been hosted in GCP. 
