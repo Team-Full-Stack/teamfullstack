@@ -22,6 +22,8 @@ Our identity server has been deployed to a virtual machine that has been hosted 
 
 The initial steps are all in the [Blog](https://gitlab.desy.de/johannes.reppin/keycloak-docker-compose) and [this Plural Sight](https://app.pluralsight.com/library/courses/keycloak-getting-started/table-of-contents) course. Once you have completed the steps, clone the repo, navigate to the repository dir on your machine and run the following commands
 
+The interesting part about this installation is the `nginxproxy/acme-companion` image. This couples very nice with the base nginx image `nginxproxy/nginx-proxy` image as it issues an ssl certificate for you from let-encrypt.
+
 ```bash
 $ docker compose pull
 $ docker compose up -d
