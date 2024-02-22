@@ -143,7 +143,7 @@ pip3 --version
 Now to install poetry run the following command
 
 ```
-pip install poertry
+pip install poetry
 ```
 
 To verify install, run the following command
@@ -218,5 +218,72 @@ isort $(git ls-files "*.py" --modified) && black -l 120 $(git ls-files "*.py" --
 # Add files from git.patch
 
 git app filename.patch
+
+# Code structure in tree shape
+```
+.
+├── BUILD.bazel
+├── README.md
+├── Vonoy.postman_collection.json
+├── WORKSPACE.bazel
+├── apps
+│   └── api
+│       ├── BUILD.bazel
+│       ├── service.py
+│       └── test_service.http
+├── lib
+│   ├── forecast_model
+│   │   ├── api
+│   │   │   ├── BUILD.bazel
+│   │   │   ├── __init__.py
+│   │   │   ├── pyproject.toml
+│   │   │   └── routes.py
+│   │   ├── models
+│   │   │   ├── BUILD.bazel
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-39.pyc
+│   │   │   │   └── core.cpython-39.pyc
+│   │   │   ├── core.py
+│   │   │   ├── pyproject.toml
+│   │   │   └── tests
+│   │   │       ├── conftest.py
+│   │   │       └── test_forecast_input.py
+│   │   ├── services
+│   │   │   ├── BUILD.bazel
+│   │   │   ├── __init__.py
+│   │   │   ├── __pycache__
+│   │   │   │   ├── __init__.cpython-39.pyc
+│   │   │   │   └── services.cpython-39.pyc
+│   │   │   ├── models
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── __pycache__
+│   │   │   │   │   ├── __init__.cpython-39.pyc
+│   │   │   │   │   └── forecast_model.cpython-39.pyc
+│   │   │   │   └── forecast_model.py
+│   │   │   ├── pyproject.toml
+│   │   │   ├── services.py
+│   │   │   └── tests
+│   │   │       ├── conftest.py
+│   │   │       └── test_get_forecast_prediction.py
+│   │   └── testsupport
+│   │       ├── BUILD.bazel
+│   │       ├── __init__.py
+│   │       ├── forecast_sample_data.py
+│   │       └── pyproject.toml
+│   └── vonoy
+│       └── tools
+│           └── pytest
+│               ├── BUILD.bazel
+│               ├── defs.bzl
+│               └── pytest_wrapper.py
+├── pyproject.toml
+├── third_party
+│   ├── BUILD.bazel
+│   ├── poetry.lock
+│   └── pyproject.toml
+└── tree_2.1.1-2_amd64.deb
+
+```
 
 ```
