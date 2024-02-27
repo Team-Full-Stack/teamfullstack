@@ -48,7 +48,10 @@ After that, we will install the latest version on Pyenv. So, we will need to clo
 
 ```
 pyenv install 3.10
+
 pyenv global 3.10
+
+poetry config virtualenvs.in-project true
 
 ```
 
@@ -189,6 +192,7 @@ poetry install
 poetry shell
 
 cd ..
+
 ```
 
 After setting up environment you can perform some functions using following commands
