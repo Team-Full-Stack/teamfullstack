@@ -33,7 +33,9 @@ Let's install pyenv so that every dependency or library installed will be exclus
 
 Open terminal and execute the following commands
 
-```apt update -y```
+```shell
+apt update -y
+```
 
 Now let's install pyenv dependencies
 
@@ -52,7 +54,6 @@ pyenv install 3.10
 pyenv global 3.10
 
 poetry config virtualenvs.in-project true
-
 ```
 
 And for the last step, we must add pyenv to our path so that the pyenv command is recognized globally.
@@ -61,21 +62,18 @@ And for the last step, we must add pyenv to our path so that the pyenv command i
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
-
 ```
 
 Finally, to start using pyenv, restart the shell and execute command:
 
 ```
 pyenv activate
-
 ```
 
 If you want to update pyenv you can use command
 
 ```
 pyenv update
-
 ```
 
 ### Installing python
@@ -114,7 +112,7 @@ Supported Ubuntu Linux platforms on the time of writing this blog are:
  - 20.04 (LTS)
  - 18.04 (LTS)
 
-On Linux: You can download Bazelisk binary on our [Releases]:(https://github.com/bazelbuild/bazelisk/releases) page and add it to your PATH manually, which also works on macOS and Windows.
+On Linux: You can download Bazelisk binary on our [Releases](https://github.com/bazelbuild/bazelisk/releases) page and add it to your PATH manually, which also works on macOS and Windows.
 
 To verify install, run the following command
 
@@ -155,20 +153,23 @@ To verify install, run the following command
 poetry --version
 ```
 ### How do I configure LSP / DSP or other IDE tools ?
+
 Bazel runs in a sandbox, however we are using [poetry][poetry] to manage dependencies. These dependencies are located in the third_party/ folder. As long as you set your IDE python interpreter to be the poetry env python, things should function normally in your IDE.
 
 Here is one way to do this:
 
 ```
 $ cd third_party
+```
+#### Get the python executable form the virtual env used by poetry, this is the python interpreter to use
 
-# Get the python executable form the virtual env used by poetry, this is the python interpreter to use
-
+```
 poetry env info --executable
+```
 
-# An easy way to get the IDE to use the right environment is getting the poetry shell, which will set the right python
-# interpreter and then cd to the project root and fire up your editor
+#### An easy way to get the IDE to use the right environment is getting the poetry shell, which will set the right python interpreter and then cd to the project root and fire up your editor
 
+```
 cd third_party
 
 poetry shell
@@ -192,36 +193,46 @@ poetry install
 poetry shell
 
 cd ..
-
 ```
 
 After setting up environment you can perform some functions using following commands
 
+
+#### Run the fast_api locally (should start a service on 0.0.0.0:8080)
+#### Open api documentation available at "/docs"
+
 ```
-# Run the fast_api locally (should start a service on 0.0.0.0:8080)
-# Open api documentation available at "/docs"
-
 bazel run //apps/api
+```
+#### Run the starlette_api locally in debug mode (debugpy will wait for a debugger client to connect)
 
-# Run the starlette_api locally in debug mode (debugpy will wait for a debugger client to connect)
-
+```
 bazel run //apps/api --define DEBUG=1
+```
 
-# Clean everything
+### Clean everything
 
+```
 bazel clean --expunge
+```
 
-# Run all unit tests
+### Run all unit tests
 
+```
 bazel test $(bazel query 'attr(name, "module_tests", //...)') --test_output=streamed --test_arg="--disable-warnings" --nocache_test_results
+```
 
-# Run format and linting (before staging)
+### Run format and linting (before staging)
 
+```
 isort $(git ls-files "*.py" --modified) && black -l 120 $(git ls-files "*.py" --modified)
+```
 
-# Add files from git.patch
+### Add files from git.patch
 
+```
 git app filename.patch
+```
 
 # Code structure in tree shape
 
@@ -287,6 +298,4 @@ git app filename.patch
 │   ├── poetry.lock  
 │   └── pyproject.toml  
 └── tree_2.1.1-2_amd64.deb  
-
-```
 ```
