@@ -41,6 +41,7 @@ _styles: >
 
 ASP Dot Net 8.0 and React.ts with Docker compose
 Create root folder name like `asp-react-nginx-compose` or other suit able.
+
 In it create 3 folders and 1 file in root folder :
 #### The Project structure is:
 ```plaintext
@@ -52,6 +53,7 @@ app
 
 4 directories, 1 file
 ```
+Here is the reference of project public repo in github [Source Code](https://github.com/usman-jamil/dev-docs/tree/main) of given example project asp-react-nginx-compose.
 
 ### ASP.NET 8.0 and React.ts with Docker Compose
 
