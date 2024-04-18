@@ -40,7 +40,7 @@ _styles: >
 ---
 
 ASP Dot Net 8.0 and React.ts with Docker compose
-Create root folder name like `asp-react-nginx-compose` or other suit able.
+Create root folder name like `asp-react-nginx-compose` or other suitable.
 
 In it create 3 folders and 1 file in root folder :
 #### The Project structure is:
@@ -57,47 +57,8 @@ Here is the reference of project public repo in github [Source Code](https://git
 
 ### ASP.NET 8.0 and React.ts with Docker Compose
 
-This guide explains how to set up a project structure using ASP.NET, React, and Nginx within Docker containers. Below are detailed steps for configuring your development environment, including Docker installation.
+We will see how docker compose can be used to perform orchestration between containers, keeping isolation in mind i.e., while some containers can talk to each other, we might not want that for others e.g., have NGINX be the communications broker between the front-end and back-end and not allow them to talk to each other directly. This has several use-cases which are outside the scope of this blog.
 
-* For enabling Docker support in project it is important Docker is install and running in Laptop and computer.
-Before you start setting up your project, you need to install Docker on your machine if it isn't already installed. Docker allows you to create, deploy, and run applications by using containers.
-
-### For Windows
-
-1. Download Docker Desktop from the [official Docker website](https://www.docker.com/products/docker-desktop).
-2. Run the installer and follow the on-screen instructions.
-3. Ensure that the "Windows Subsystem for Linux" (WSL2) feature is enabled on your machine.
-4. After installation, launch Docker Desktop and sign in or create a Docker account if prompted.
-
-### For macOS
-
-1. Download Docker Desktop for Mac from the [official Docker website](https://www.docker.com/products/docker-desktop).
-2. Open the downloaded `.dmg` file and drag the Docker icon to your Applications folder.
-3. Open Docker from your Applications to complete the installation.
-4. Docker may request your password to install a helper tool; provide your password to continue.
-
-### For Linux
-
-The installation commands can vary depending on your Linux distribution. Here's how you can install Docker on Ubuntu:
-
-1. Update your existing list of packages:
-```bash
-  $ sudo apt update
-
-  $ sudo apt install apt-transport-https ca-certificates curl software-properties-common
-
-  $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-  $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
-  $ sudo apt update
-
-  $ apt-cache policy docker-ce
-
-  $ sudo apt install docker-ce
-
-docker run hello-world
-```
 ## Backend Configuration
 
 This will generate a `Dockerfile` in your project directory, which might look something like this:
