@@ -1,10 +1,10 @@
 ---
 layout: distill
-title: Krazzy Adventures
-description: A booking website where users can book to participate in different events.
-tags: Krazzy booking
+title: Asp dot net 8.0 and React with Docker-compose
+description: How to create a project with Asp Dotnet 8.0 and React with Docker-compose
+tags: Docker-compose With dotnet and react
 giscus_comments: true
-date: 2023-12-06
+date: 2024-04-18
 featured: false
 
 authors:
@@ -21,7 +21,7 @@ authors:
     affiliations:
       name: Allied Consultants
 
-bibliography: 2018-12-22-krazzy.bib
+# bibliography: 2024-04-18-asp_dotnet_react_docker-compose.bib
 
 # Optionally, you can add a table of contents to your post.
 # NOTES:
@@ -29,39 +29,39 @@ bibliography: 2018-12-22-krazzy.bib
 #     for hyperlinks within the post to work correctly.
 #   - we may want to automate TOC generation in the future using
 #     jekyll-toc plugin (https://github.com/toshimaru/jekyll-toc).
-toc:
-  - name: Admin portal
-    subsections:
-      - name: Users
-      - name: Events
-        subsections:
-          - name: Create Event
-          - name: All Event
-          - name: Published Event
-          - name: Book Event
-      - name: Images
-        subsections:
-          - name: Upload Images
-          - name: All Images
+# toc:
+#   - name: Admin portal
+#     subsections:
+#       - name: Users
+#       - name: Events
+#         subsections:
+#           - name: Create Event
+#           - name: All Event
+#           - name: Published Event
+#           - name: Book Event
+#       - name: Images
+#         subsections:
+#           - name: Upload Images
+#           - name: All Images
     # if a section has subsections, you can add them as follows:
     # subsections:
     #   - name: Example Child Subsection 1
     #   - name: Example Child Subsection 2
-  - name: Homepage
-    subsections:
-      - name: Sections
-        subsections:
-          - name: Highlights
-          - name: Admins
-  - name: Events
-    subsections:
-      - name: Categories
-      - name: Single Event
-      - name: Event Details
-  - name: Contact Us
-    subsections:
-      - name: Contact Us form
-      - name: FAQ
+  # - name: Homepage
+  #   subsections:
+  #     - name: Sections
+  #       subsections:
+  #         - name: Highlights
+  #         - name: Admins
+  # - name: Events
+  #   subsections:
+  #     - name: Categories
+  #     - name: Single Event
+  #     - name: Event Details
+  # - name: Contact Us
+  #   subsections:
+  #     - name: Contact Us form
+  #     - name: FAQ
       
 
 # Below is an example of injecting additional post-specific styles.
@@ -85,8 +85,8 @@ _styles: >
 ---
 
 ASP Dot Net 8.0 and React.ts with Docker compose
-Create main folder name like `asp-react-nginx-compose` or other suit able.
-In it create 3 folders and 1 file in main folder :
+Create root folder name like `asp-react-nginx-compose` or other suit able.
+In it create 3 folders and 1 file in root folder :
 #### The Project structure is:
 ```plaintext
 app
@@ -127,19 +127,19 @@ The installation commands can vary depending on your Linux distribution. Here's 
 
 1. Update your existing list of packages:
 ```bash
-   sudo apt update
+  $ sudo apt update
 
-sudo apt install apt-transport-https ca-certificates curl software-properties-common
+  $ sudo apt install apt-transport-https ca-certificates curl software-properties-common
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
-sudo apt update
+  $ sudo apt update
 
-apt-cache policy docker-ce
+  $ apt-cache policy docker-ce
 
-sudo apt install docker-ce
+  $ sudo apt install docker-ce
 
 docker run hello-world
 ```
