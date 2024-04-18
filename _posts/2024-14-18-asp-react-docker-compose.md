@@ -53,15 +53,13 @@ app
 
 4 directories, 1 file
 ```
-Here is the reference of project public repo in github [Source Code](https://github.com/usman-jamil/dev-docs/tree/main) of given example project asp-react-nginx-compose.
+Here is the reference of project public repo in github [Source Code](https://github.com/Luqmant51/asp-react-nginx-compose) of given example project asp-react-nginx-compose.
 
 ### ASP.NET 8.0 and React.ts with Docker Compose
 
 This guide explains how to set up a project structure using ASP.NET, React, and Nginx within Docker containers. Below are detailed steps for configuring your development environment, including Docker installation.
 
 * For enabling Docker support in project it is important Docker is install and running in Laptop and computer.
-## Installing Docker
-
 Before you start setting up your project, you need to install Docker on your machine if it isn't already installed. Docker allows you to create, deploy, and run applications by using containers.
 
 ### For Windows
@@ -101,24 +99,6 @@ The installation commands can vary depending on your Linux distribution. Here's 
 docker run hello-world
 ```
 ## Backend Configuration
-
-### Creating the ASP.NET Project
-
-Navigate into the `backend` folder and create a new ASP.NET project. You can add Docker support during the project creation or after the project has been created.
-#### During Project Creation
-1. Mark check true to Enable Docker
-2. Select Docker OS: Linux
-
-<img src="../assets/img/Screenshot1.png" width="50%" height="50%">
-
-#### After Project Creation
-
-Right-click on the project name in your IDE, then:
-
-1. Click "Add"
-2. Select "Docker Support"
-
-<img src="../assets/img/Screenshot2.png" width="50%" height="50%">
 
 This will generate a `Dockerfile` in your project directory, which might look something like this:
 ```Dockerfile

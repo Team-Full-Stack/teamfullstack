@@ -63,25 +63,7 @@ Before you start setting up your project, you need to install Docker on your mac
 
 The installation commands can vary depending on your Linux distribution. Here's how you can install Docker on Ubuntu:
 
-1. Update your existing list of packages:
-```bash
-  $ sudo apt update
-
-  $ sudo apt install apt-transport-https ca-certificates curl software-properties-common
-
-  $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-  $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
-  $ sudo apt update
-
-  $ apt-cache policy docker-ce
-
-  $ sudo apt install docker-ce
-
-docker run hello-world
-```
-2. Or Using this link just copy and past
+1. Using this link just copy and past
 ```bash
 curl https://get.docker.com/ | bash
 ```
