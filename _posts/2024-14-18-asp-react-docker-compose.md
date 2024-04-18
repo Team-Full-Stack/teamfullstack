@@ -21,51 +21,6 @@ authors:
     affiliations:
       name: Allied Consultants
 
-# bibliography: 2024-04-18-asp_dotnet_react_docker-compose.bib
-
-# Optionally, you can add a table of contents to your post.
-# NOTES:
-#   - make sure that TOC names match the actual section names
-#     for hyperlinks within the post to work correctly.
-#   - we may want to automate TOC generation in the future using
-#     jekyll-toc plugin (https://github.com/toshimaru/jekyll-toc).
-# toc:
-#   - name: Admin portal
-#     subsections:
-#       - name: Users
-#       - name: Events
-#         subsections:
-#           - name: Create Event
-#           - name: All Event
-#           - name: Published Event
-#           - name: Book Event
-#       - name: Images
-#         subsections:
-#           - name: Upload Images
-#           - name: All Images
-    # if a section has subsections, you can add them as follows:
-    # subsections:
-    #   - name: Example Child Subsection 1
-    #   - name: Example Child Subsection 2
-  # - name: Homepage
-  #   subsections:
-  #     - name: Sections
-  #       subsections:
-  #         - name: Highlights
-  #         - name: Admins
-  # - name: Events
-  #   subsections:
-  #     - name: Categories
-  #     - name: Single Event
-  #     - name: Event Details
-  # - name: Contact Us
-  #   subsections:
-  #     - name: Contact Us form
-  #     - name: FAQ
-      
-
-# Below is an example of injecting additional post-specific styles.
-# If you use this post as a template, delete this _styles block.
 _styles: >
   .fake-img {
     background: #bbb;
@@ -198,11 +153,8 @@ COPY package.json ./
 RUN npm install
 COPY . .
 RUN npm run build
-# Install a simple server to serve static content
 RUN npm install -g serve
-# Serve the app on port 4000
 CMD ["serve", "-s", "build", "-l", "4000"]
-# Expose port 4000
 EXPOSE 4000
 ```
 
@@ -215,11 +167,11 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile  # Assuming the name is Dockerfile
+      dockerfile: Dockerfile
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile  # Assuming the Dockerfile name is Docker.dev
+      dockerfile: Dockerfile
     depends_on:
       - backend
   nginx:
