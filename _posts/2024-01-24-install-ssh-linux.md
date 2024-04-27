@@ -13,7 +13,14 @@ authors:
     url: "https://github.com/usman-jamil"
     affiliations:
       name: Allied Consultants
-
+  - name:  Sheikh Luqman
+    url: "https://en.wikipedia.org/wiki/Boris_Podolsky"
+    affiliations:
+      name: Allied Consultants
+  - name: Zuhaib Sohail
+    url: "https://github.com/ZuhaibSohail163"
+    affiliations:
+      name: Allied Consultants
 ---
 
 ### Generate Keys

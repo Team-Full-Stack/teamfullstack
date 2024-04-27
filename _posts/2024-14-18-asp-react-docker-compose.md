@@ -13,7 +13,7 @@ authors:
     affiliations:
       name: Allied Consultants
   - name:  Sheikh Luqman
-    url: "https://en.wikipedia.org/wiki/Boris_Podolsky"
+    url: "https://github.com/luqmant51/"
     affiliations:
       name: Allied Consultants
   - name: Zuhaib Sohail
