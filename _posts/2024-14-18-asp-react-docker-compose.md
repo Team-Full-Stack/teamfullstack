@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: Asp dot net 8.0 and React with Docker-compose
+title: Asp.net 8.0 and React with Docker-compose
 description: How to create a project with Asp Dotnet 8.0 and React with Docker-compose
 tags: Docker-compose With dotnet and react
 giscus_comments: true
@@ -39,7 +39,7 @@ _styles: >
 
 ---
 
-ASP Dot Net 8.0 and React.ts with Docker compose
+ASP.net 8.0 and React with Docker compose
 Create root folder name like `asp-react-nginx-compose` or other suitable.
 
 In it create 3 folders and 1 file in root folder :
@@ -55,7 +55,7 @@ app
 ```
 Here is the reference of project public repo in github [Source Code](https://github.com/Luqmant51/asp-react-nginx-compose) of given example project asp-react-nginx-compose.
 
-### ASP.NET 8.0 and React.ts with Docker Compose
+### ASP.NET 8.0 and React with Docker Compose
 
 We will see how docker compose can be used to perform orchestration between containers, keeping isolation in mind i.e., while some containers can talk to each other, we might not want that for others e.g., have NGINX be the communications broker between the front-end and back-end and not allow them to talk to each other directly. This has several use-cases which are outside the scope of this blog.
 

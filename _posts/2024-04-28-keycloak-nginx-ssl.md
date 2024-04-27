@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deploying keycloak with a purchased SSL
-date: 2024-01-22
+date: 2024-04-22
 description: Keycloak, Postgres, Nginx and positive SSL
 tags: keycloak docker-compose
 categories: identity-as-a-service, ssl
