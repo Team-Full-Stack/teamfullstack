@@ -14,13 +14,14 @@ authors:
     affiliations:
       name: Allied Consultants
   - name:  Sheikh Luqman
-    url: "https://github.com/luqmant51/"
+    url: "https://github.com/luqmant51"
     affiliations:
       name: Allied Consultants
   - name: Zuhaib Sohail
     url: "https://github.com/ZuhaibSohail163"
     affiliations:
       name: Allied Consultants
+
 ---
 
 # Introduction

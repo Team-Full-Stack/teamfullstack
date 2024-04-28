@@ -14,13 +14,14 @@ authors:
     affiliations:
       name: Allied Consultants
   - name:  Sheikh Luqman
-    url: "https://en.wikipedia.org/wiki/Boris_Podolsky"
+    url: "https://github.com/luqmant51"
     affiliations:
       name: Allied Consultants
   - name: Zuhaib Sohail
     url: "https://github.com/ZuhaibSohail163"
     affiliations:
       name: Allied Consultants
+
 ---
 
 We are going to deploy a keycloak development server on a virtual machine. This article is based on [Johannes Reppin's](https://gitlab.desy.de/johannes.reppin/keycloak-docker-compose) implementation. The basic steps are all mentioned in the README file of this repository. However, a few key steps are worth mentioning.
