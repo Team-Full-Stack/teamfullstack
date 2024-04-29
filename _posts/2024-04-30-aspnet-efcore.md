@@ -39,7 +39,7 @@ _styles: >
 
 ---
 
-ASP.net 8.0 and Entity Core Framework
+ASP.net 8.0 and Entity Core Framework with postgres sql and docker compose
 
 Create Web Api Project 
 
@@ -48,30 +48,32 @@ Here is the reference of project public repo in GitHub [Source Code](https://git
 
 This will generate a `Dockerfile` in your project directory, which might look something like this:
 ```Dockerfile
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
-WORKDIR /app
-EXPOSE 8080
-EXPOSE 8081
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-ARG BUILD_CONFIGURATION=Release
-WORKDIR /src
-COPY ["backend.csproj", "."]
-RUN dotnet restore "./backend.csproj"
-COPY . .
-WORKDIR "/src/."
-RUN dotnet build "./backend.csproj" -c $BUILD_CONFIGURATION -o /app/build
-FROM build AS publish
-ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./backend.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "backend.dll"]
+version: '3.8'
+services:
+  postgres:
+    container_name: container-pg
+    image: postgres
+    hostname: localhost
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: test_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
 ```
 
 In terminal navigate to root folder of the project
+
+## Run postgres for this sample
+```shell
+docker compose -f docker-compose-postgres.yml up -d
+```
 
 ### Here is command to run migrations 
 
