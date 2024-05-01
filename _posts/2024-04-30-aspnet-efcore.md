@@ -1,7 +1,7 @@
 ---
 layout: distill
-title: Asp.net 8.0 and Next with Docker-compose
-description: How to create a project with Asp Dotnet 8.0 and Next with Docker-compose
+title: ASP.net 8.0 and Entity Core Framework with postgres sql and docker compose
+description: ASP.NET 8.0 is a framework for building web apps and services, paired with Entity Framework Core for database operations. Docker Compose is used to manage and deploy these applications with PostgreSQL, ensuring a streamlined development and deployment process.
 tags: Docker-compose With dotnet and next
 giscus_comments: true
 date: 2024-04-18
