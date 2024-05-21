@@ -1,0 +1,106 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title>Instaling bazel on linux | Team Full Stack</title> <meta name="author" content="Team Full. Stack"> <meta name="description" content="Setting up your bazel configurations on linux"> <meta name="keywords" content="jekyll, jekyll-theme, academic-website, portfolio-website"> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css"> <link rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons"> <link rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?19f3075a2d19613090fe9e16b564e1fe" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/profile.jpeg?b6d31c5b86e524b5e43cba1d5ca33348"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://blog.teamfullstack.io//blog/2024/install-bazel-ubuntu/"> <link rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?e74e74bf055e5729d44a7d031a5ca6a5" media="none" id="highlight_theme_dark"> <script src="/assets/js/theme.js?96d6b3e1c3604aca8b6134c7afdd5db6"></script> <script src="/assets/js/dark_mode.js?9b17307bb950ffa2e34be0227f53558f"></script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/">Team Full Stack</a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">about</a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog<span class="sr-only">(current)</span></a> </li> <li class="nav-item "> <a class="nav-link" href="/projects/">projects</a> </li> <li class="nav-item "> <a class="nav-link" href="/repositories/">repositories</a> </li> <li class="nav-item "> <a class="nav-link" href="/people/">people</a> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="fa-solid fa-moon"></i> <i class="fa-solid fa-sun"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5"> <div class="post"> <header class="post-header"> <h1 class="post-title">Instaling bazel on linux</h1> <p class="post-meta">January 25, 2024</p> <p class="post-tags"> <a href="/blog/2024"> <i class="fa-solid fa-calendar fa-sm"></i> 2024 </a>   ·   <a href="/blog/tag/bazel"> <i class="fa-solid fa-hashtag fa-sm"></i> bazel</a>   <a href="/blog/tag/linux"> <i class="fa-solid fa-hashtag fa-sm"></i> linux</a>     ·   <a href="/blog/category/deployment"> <i class="fa-solid fa-tag fa-sm"></i> deployment</a>   </p> </header> <article class="post-content"> <div id="markdown-content"> <h3 id="required-dependencies">Required Dependencies</h3> <p>To install bazel for python project you need to install the following.</p> <ul> <li>Bazelisk</li> <li>poetry</li> <li>pyenv</li> </ul> <h3 id="pyenv">Pyenv</h3> <p>First of all <code class="language-plaintext highlighter-rouge">What is pyenv?</code> Basically, Pyenv is a tool to simplify installation and version changing in python. It helps developers quickly install or change the python version without needing to change the whole system.</p> <p>Let’s install pyenv so that every dependency or library installed will be exclusive to this project</p> <p>Open terminal and execute the following commands</p> <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt update <span class="nt">-y</span>
+</code></pre></div></div> <p>Now let’s install pyenv dependencies</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt install -y make build-essential libssl-dev zlib1g-dev \
+&gt; libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev\
+&gt; libncursesw5-dev xz-utils tk-dev libffi-dev liblzma-dev python-openssl\
+&gt; git
+</code></pre></div></div> <p>After that, we will install the latest version on Pyenv. So, we will need to clone from the Pyenv repository.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv install 3.10
+
+pyenv global 3.10
+
+poetry config virtualenvs.in-project true
+</code></pre></div></div> <p>And for the last step, we must add pyenv to our path so that the pyenv command is recognized globally.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo 'export PYENV_ROOT="$HOME/.pyenv"' &gt;&gt; ~/.bashrc
+echo 'export PATH="$PYENV_ROOT/bin:$PATH"' &gt;&gt; ~/.bashrc
+echo 'eval "$(pyenv init --path)"' &gt;&gt; ~/.bashrc
+</code></pre></div></div> <p>Finally, to start using pyenv, restart the shell and execute command:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv activate
+</code></pre></div></div> <p>If you want to update pyenv you can use command</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pyenv update
+</code></pre></div></div> <h3 id="installing-python">Installing python</h3> <p>After configuring pyenv we need to install python.</p> <p>First check if python is already installed</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3
+</code></pre></div></div> <p>if it shows error, run following commands</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt update
+</code></pre></div></div> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install python3
+</code></pre></div></div> <p>Now verify installation</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 --version
+</code></pre></div></div> <h3 id="installing-bazel">Installing Bazel</h3> <p>Bazelisk is a wrapper for Bazel written in Go. It automatically picks a good version of Bazel given your current working directory, downloads it from the official server (if required) and then transparently passes through all command-line arguments to the real Bazel binary. You can call it just like you would call Bazel.</p> <h3 id="supported-versions">Supported Versions</h3> <p>Supported Ubuntu Linux platforms on the time of writing this blog are:</p> <ul> <li>22.04 (LTS)</li> <li>20.04 (LTS)</li> <li>18.04 (LTS)</li> </ul> <p>On Linux: You can download Bazelisk binary on our <a href="https://github.com/bazelbuild/bazelisk/releases" rel="external nofollow noopener" target="_blank">Releases</a> page and add it to your PATH manually, which also works on macOS and Windows.</p> <p>To verify install, run the following command</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bazel --version
+</code></pre></div></div> <h3 id="installing-poetry">Installing poetry</h3> <p>Now let’s install poetry</p> <h4 id="introduction">Introduction</h4> <p>Poetry is a tool for dependency management and packaging in Python. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. Poetry offers a lockfile to ensure repeatable installs, and can build your project for distribution</p> <p>To install poetry you need to install <strong>pip</strong> first</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt install python3-pip
+</code></pre></div></div> <p>To verify install, run the following command</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 --version
+</code></pre></div></div> <p>Now to install poetry run the following command</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install poetry
+</code></pre></div></div> <p>To verify install, run the following command</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry --version
+</code></pre></div></div> <h3 id="how-do-i-configure-lsp--dsp-or-other-ide-tools-">How do I configure LSP / DSP or other IDE tools ?</h3> <p>Bazel runs in a sandbox, however we are using [poetry][poetry] to manage dependencies. These dependencies are located in the third_party/ folder. As long as you set your IDE python interpreter to be the poetry env python, things should function normally in your IDE.</p> <p>Here is one way to do this:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd third_party
+</code></pre></div></div> <h4 id="get-the-python-executable-form-the-virtual-env-used-by-poetry-this-is-the-python-interpreter-to-use">Get the python executable form the virtual env used by poetry, this is the python interpreter to use</h4> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry env info --executable
+</code></pre></div></div> <h4 id="an-easy-way-to-get-the-ide-to-use-the-right-environment-is-getting-the-poetry-shell-which-will-set-the-right-python-interpreter-and-then-cd-to-the-project-root-and-fire-up-your-editor">An easy way to get the IDE to use the right environment is getting the poetry shell, which will set the right python interpreter and then cd to the project root and fire up your editor</h4> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd third_party
+
+poetry shell
+
+cd ..
+
+code
+</code></pre></div></div> <h3 id="setup-development-environment">Setup Development Environment</h3> <p>Create the environment</p> <p>Using terminal navigate to: third_party folder</p> <p>Run these commands</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>poetry install
+
+poetry shell
+
+cd ..
+</code></pre></div></div> <p>After setting up environment you can perform some functions using following commands</p> <h4 id="run-the-fast_api-locally-should-start-a-service-on-00008080">Run the fast_api locally (should start a service on 0.0.0.0:8080)</h4> <h4 id="open-api-documentation-available-at-docs">Open api documentation available at “/docs”</h4> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bazel run //apps/api
+</code></pre></div></div> <h4 id="run-the-starlette_api-locally-in-debug-mode-debugpy-will-wait-for-a-debugger-client-to-connect">Run the starlette_api locally in debug mode (debugpy will wait for a debugger client to connect)</h4> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bazel run //apps/api --define DEBUG=1
+</code></pre></div></div> <h3 id="clean-everything">Clean everything</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bazel clean --expunge
+</code></pre></div></div> <h3 id="run-all-unit-tests">Run all unit tests</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bazel test $(bazel query 'attr(name, "module_tests", //...)') --test_output=streamed --test_arg="--disable-warnings" --nocache_test_results
+</code></pre></div></div> <h3 id="run-format-and-linting-before-staging">Run format and linting (before staging)</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>isort $(git ls-files "*.py" --modified) &amp;&amp; black -l 120 $(git ls-files "*.py" --modified)
+</code></pre></div></div> <h3 id="add-files-from-gitpatch">Add files from git.patch</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git app filename.patch
+</code></pre></div></div> <h1 id="code-structure-in-tree-shape">Code structure in tree shape</h1> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── BUILD.bazel  
+├── README.md  
+├── Vonoy.postman_collection.json  
+├── WORKSPACE.bazel  
+├── apps  
+│   └── api  
+│       ├── BUILD.bazel  
+│       ├── service.py  
+│       └── test_service.http  
+├── lib  
+│   ├── forecast_model  
+│   │   ├── api  
+│   │   │   ├── BUILD.bazel  
+│   │   │   ├── __init__.py  
+│   │   │   ├── pyproject.toml  
+│   │   │   └── routes.py  
+│   │   ├── models  
+│   │   │   ├── BUILD.bazel  
+│   │   │   ├── __init__.py  
+│   │   │   ├── __pycache__  
+│   │   │   │   ├── __init__.cpython-39.pyc  
+│   │   │   │   └── core.cpython-39.pyc  
+│   │   │   ├── core.py  
+│   │   │   ├── pyproject.toml  
+│   │   │   └── tests  
+│   │   │       ├── conftest.py  
+│   │   │       └── test_forecast_input.py  
+│   │   ├── services  
+│   │   │   ├── BUILD.bazel  
+│   │   │   ├── __init__.py  
+│   │   │   ├── __pycache__  
+│   │   │   │   ├── __init__.cpython-39.pyc  
+│   │   │   │   └── services.cpython-39.pyc  
+│   │   │   ├── models  
+│   │   │   │   ├── __init__.py  
+│   │   │   │   ├── __pycache__  
+│   │   │   │   │   ├── __init__.cpython-39.pyc  
+│   │   │   │   │   └── forecast_model.cpython-39.pyc  
+│   │   │   │   └── forecast_model.py  
+│   │   │   ├── pyproject.toml  
+│   │   │   ├── services.py  
+│   │   │   └── tests  
+│   │   │       ├── conftest.py  
+│   │   │       └── test_get_forecast_prediction.py  
+│   │   └── testsupport  
+│   │       ├── BUILD.bazel  
+│   │       ├── __init__.py  
+│   │       ├── forecast_sample_data.py  
+│   │       └── pyproject.toml  
+│   └── vonoy  
+│       └── tools  
+│           └── pytest  
+│               ├── BUILD.bazel  
+│               ├── defs.bzl  
+│               └── pytest_wrapper.py  
+├── pyproject.toml  
+├── third_party  
+│   ├── BUILD.bazel    
+│   ├── poetry.lock  
+│   └── pyproject.toml  
+└── tree_2.1.1-2_amd64.deb  
+</code></pre></div></div> </div> </article><div id="giscus_thread" style="max-width: 800px; margin: 0 auto;"> <script>let giscusTheme=localStorage.getItem("theme"),giscusAttributes={src:"https://giscus.app/client.js","data-repo":"Team-Full-Stack/teamfullstack","data-repo-id":"R_kgDOK1xQig","data-category":"General","data-category-id":"DIC_kwDOK1xQis4CbmOu","data-mapping":"title","data-strict":"1","data-reactions-enabled":"1","data-emit-metadata":"0","data-input-position":"top","data-theme":giscusTheme,"data-lang":"en",crossorigin:"anonymous",async:""},giscusScript=document.createElement("script");Object.entries(giscusAttributes).forEach(([t,e])=>giscusScript.setAttribute(t,e)),document.getElementById("giscus_thread").appendChild(giscusScript);</script> <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> </div> <footer class="fixed-bottom"> <div class="container mt-0"> © Copyright 2024 Team Full. Stack. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Photos from <a href="https://unsplash.com" target="_blank" rel="external nofollow noopener">Unsplash</a>. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script> <script defer src="/assets/js/masonry.js" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?7b30caa5023af4af8408a472dc4e1ebb"></script> <script defer src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script> <script src="/assets/js/no_defer.js?d633890033921b33e0ceb13d22340a9c"></script> <script defer src="/assets/js/common.js?acdb9690d7641b2f8d40529018c71a01"></script> <script defer src="/assets/js/copy_code.js?07b8786bab9b4abe90d10e61f7d12ff7" type="text/javascript"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script type="text/javascript">window.MathJax={tex:{tags:"ams"}};</script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script> <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script type="text/javascript">function progressBarSetup(){"max"in document.createElement("progress")?(initializeProgressElement(),$(document).on("scroll",function(){progressBar.attr({value:getCurrentScrollPosition()})}),$(window).on("resize",initializeProgressElement)):(resizeProgressBar(),$(document).on("scroll",resizeProgressBar),$(window).on("resize",resizeProgressBar))}function getCurrentScrollPosition(){return $(window).scrollTop()}function initializeProgressElement(){let e=$("#navbar").outerHeight(!0);$("body").css({"padding-top":e}),$("progress-container").css({"padding-top":e}),progressBar.css({top:e}),progressBar.attr({max:getDistanceToScroll(),value:getCurrentScrollPosition()})}function getDistanceToScroll(){return $(document).height()-$(window).height()}function resizeProgressBar(){progressBar.css({width:getWidthPercentage()+"%"})}function getWidthPercentage(){return getCurrentScrollPosition()/getDistanceToScroll()*100}const progressBar=$("#progress");window.onload=function(){setTimeout(progressBarSetup,50)};</script> </body> </html>
