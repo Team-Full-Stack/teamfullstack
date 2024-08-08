@@ -56,16 +56,89 @@ _styles: >
   }
 ---
 
+## Implementing Rate Limiting in ASP.NET Core
+
 ## Introduction
 
 In modern web applications, managing API request rates is crucial for maintaining performance and ensuring fair usage among users. Implementing rate limiting helps to prevent abuse, mitigate denial-of-service attacks, and ensure that your service remains reliable for all users. In this blog post, we'll explore how to implement a robust API rate limiting system using ASP.NET Core.
 
-### **`Implementing Rate Limiting`**
+## What is Rate Limiting?
 
-### Configuration
+Rate limiting is a technique used to control the number of requests a client can make to an API within a specified time frame. This is essential for preventing system overload, maintaining quality of service, and ensuring that no single client consumes too many resources, which could lead to degraded performance for others.
 
-To begin, you'll need to configure the rate limiting policies in your ASP.NET Core application. Here’s how you can set it up:
+## How Does Rate Limiting Work?
 
-1. **Add Rate Limiting Services**:
-   In your `Program.cs`, configure the rate limiting services:
+Rate limiting can be implemented using various algorithms, each with its own approach to controlling the rate of requests. Common algorithms include:
+
+- **Token Bucket**: Tokens are added to a bucket at a fixed rate, and each request consumes a token. If the bucket is empty, the request is denied or delayed.
+- **Leaky Bucket**: Similar to Token Bucket, but with a focus on ensuring a steady outflow of requests, smoothing out bursts.
+- **Fixed Window**: Counts the number of requests within a fixed time window (e.g., 1 minute) and enforces a limit.
+- **Sliding Window**: Similar to Fixed Window, but the time window slides forward with each request, providing a more granular rate limit.
+
+## Benefits of Rate Limiting
+
+Implementing rate limiting provides several key benefits:
+
+1. **Prevents Abuse**: Ensures that no single client can overwhelm the API with too many requests.
+2. **Improves Performance**: Helps maintain consistent performance by controlling the load on the server.
+3. **Enhances Security**: Mitigates denial-of-service (DoS) attacks by limiting the rate of incoming requests.
+4. **Ensures Fair Usage**: Guarantees that resources are distributed fairly among users.
+
+## Implementing Rate Limiting
+
+To implement rate limiting in an ASP.NET Core application, follow these steps:
+
+### 1. Add Rate Limiting Services
+
+First, you need to add and configure the rate limiting services in your `Program.cs` file:
+
 - You can download code from this repository [Api Rate Limiting](https://github.com/Luqmant51/RateLimit.Blog)
+
+```csharp
+builder.Services.AddRateLimiter(limiterOptions =>
+{
+    limiterOptions.AddPolicy("jwt", partitioner: httpContext =>
+    {
+        var accessToken = httpContext.Features.Get<IAuthenticateResultFeature>()?
+                              .AuthenticateResult?.Properties?.GetTokenValue("access_token")
+                          ?? string.Empty;
+
+        if (!StringValues.IsNullOrEmpty(accessToken))
+        {
+            return RateLimitPartition.GetTokenBucketLimiter(accessToken, _ =>
+                new TokenBucketRateLimiterOptions
+                {
+                    TokenLimit = 10,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 0,
+                    ReplenishmentPeriod = TimeSpan.FromSeconds(60),
+                    TokensPerPeriod = 10,
+                    AutoReplenishment = true,
+                });
+        }
+
+        return RateLimitPartition.GetTokenBucketLimiter("Anon", _ =>
+            new TokenBucketRateLimiterOptions
+            {
+                TokenLimit = 5,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 0,
+                ReplenishmentPeriod = TimeSpan.FromSeconds(60),
+                TokensPerPeriod = 5,
+                AutoReplenishment = true
+            });
+    });
+    limiterOptions.OnRejected = (context, cancellationToken) =>
+    {
+        if (context.Lease.TryGetMetadata(MetadataName.RetryAfter, out TimeSpan retryAfter))
+        {
+            context.HttpContext.Response.Headers.RetryAfter = retryAfter.TotalSeconds.ToString(CultureInfo.InvariantCulture);
+        }
+
+        context.HttpContext.Response.StatusCode = StatusCodes.Status429TooManyRequests;
+        context.HttpContext.Response.WriteAsync("Too many requests. Please try again later.", cancellationToken: cancellationToken);
+
+        return new ValueTask();
+    };
+});
+```
