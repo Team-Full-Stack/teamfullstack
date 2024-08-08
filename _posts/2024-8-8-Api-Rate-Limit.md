@@ -142,3 +142,27 @@ builder.Services.AddRateLimiter(limiterOptions =>
     };
 });
 ```
+
+## What is a Partitioned Rate Limiter?
+A partitioned rate limiter allows you to apply different rate limiting policies based on specific characteristics of incoming requests, such as user identity, IP address, or API key. This approach enables you to tailor rate limits to different groups of users or request types.
+
+### `How Partitioning Works`
+In the provided code example:
+
+- Partitioning by Access Token:
+
+   - If a request contains an access token, a specific rate limiting policy is applied based on that token (e.g., 10 requests per minute).
+   - If no token is present (anonymous request), a different policy is applied (e.g., 5 requests per minute).
+
+- Rate Limiting Policy:
+  - Each partition has its own `TokenBucketLimiterOptions`, specifying the number of allowed requests, replenishment rate, and other settings.
+
+- Handling Rate Limit Exceed:
+  - When a rate limit is exceeded, the OnRejected callback sends a 429 Too Many Requests response, possibly including a Retry-After header.
+  
+- Benefits of Partitioned Rate Limiting
+  - **Customization**: Custom rate limits for different user groups or request types.
+  - **Fairness**: Ensures resource distribution is fair among users.
+  - **Scalability**: Helps in scaling rate limiting strategies as your application grows.
+
+This approach is particularly useful in scenarios where different users or client types require different levels of access, ensuring that your API remains responsive and reliable for all users.
