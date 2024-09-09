@@ -21,7 +21,7 @@ authors:
     affiliations:
       name: Allied Consultants
 
-bibliography: 2024-8-8-Go-Releaser.bib
+bibliography: 2024-09-09-Go-Releaser.bib
 
 # Optionally, you can add a table of contents to your post.
 # NOTES:
