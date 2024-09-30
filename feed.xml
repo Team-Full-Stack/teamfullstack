@@ -1,4 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://blog.teamfullstack.io//feed.xml" rel="self" type="application/atom+xml"/><link href="https://blog.teamfullstack.io//" rel="alternate" type="text/html" hreflang="en"/><updated>2024-09-09T16:32:25+00:00</updated><id>https://blog.teamfullstack.io//feed.xml</id><title type="html">Team Full Stack</title><subtitle>Works of a small yet reliable dev team. </subtitle><entry><title type="html">Automating Go-Releaser with GCP Cloud Build for Artifact Storage</title><link href="https://blog.teamfullstack.io//blog/2024/Gcp-Go-Releaser/" rel="alternate" type="text/html" title="Automating Go-Releaser with GCP Cloud Build for Artifact Storage"/><published>2024-09-09T00:00:00+00:00</published><updated>2024-09-09T00:00:00+00:00</updated><id>https://blog.teamfullstack.io//blog/2024/Gcp-Go-Releaser</id><content type="html" xml:base="https://blog.teamfullstack.io//blog/2024/Gcp-Go-Releaser/"><![CDATA[<h2 id="introduction">Introduction</h2> <p>Continuous integration and continuous delivery (CI/CD) are crucial for modern software development, and automating these processes can save significant time and reduce errors. In this guide, we’ll walk through the steps to run Go-Releaser within Google Cloud Platform (GCP) Cloud Build and upload the generated artifacts into Google Cloud Storage (GCS). Each release version will be organized into its own folder in GCS, making it easy to manage and retrieve specific versions of your software.</p> <h2 id="prerequisites">Prerequisites</h2> <p>Before we get started, ensure you have the following prerequisites in place:</p> <ul> <li><strong>Google Cloud Platform Account</strong>: You need access to a GCP project with billing enabled.</li> <li><strong>Go-Releaser</strong>: Installed on your local machine for initial setup and testing.</li> <li><strong>Google Cloud SDK</strong>: Installed and configured on your machine.</li> <li><strong>Cloud Build API</strong>: Enabled in your GCP project.</li> <li><strong>Google Cloud Storage Bucket</strong>: Created for storing the release artifacts.</li> </ul> <h2 id="setting-up-go-releaser-in-gcp-cloud-build">Setting Up Go-Releaser in GCP Cloud Build</h2> <h3 id="1-create-the-cloud-build-configuration">1. Create the Cloud Build Configuration</h3> <p>First, we’ll define a <code class="language-plaintext highlighter-rouge">cloudbuild.yaml</code> file to automate the build process using GCP Cloud Build. This file describes the steps needed to run Go-Releaser and upload the artifacts.</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">steps</span><span class="pi">:</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://blog.teamfullstack.io//feed.xml" rel="self" type="application/atom+xml"/><link href="https://blog.teamfullstack.io//" rel="alternate" type="text/html" hreflang="en"/><updated>2024-09-30T19:37:07+00:00</updated><id>https://blog.teamfullstack.io//feed.xml</id><title type="html">Team Full Stack</title><subtitle>Works of a small yet reliable dev team. </subtitle><entry><title type="html">Integrating MinIO with .NET Applications</title><link href="https://blog.teamfullstack.io//blog/2024/minio-dotnet/" rel="alternate" type="text/html" title="Integrating MinIO with .NET Applications"/><published>2024-09-30T00:00:00+00:00</published><updated>2024-09-30T00:00:00+00:00</updated><id>https://blog.teamfullstack.io//blog/2024/minio-dotnet</id><content type="html" xml:base="https://blog.teamfullstack.io//blog/2024/minio-dotnet/"><![CDATA[<h2 id="introduction">Introduction</h2> <p>MinIO is a high-performance, S3-compatible object storage service that is perfect for cloud-native applications. In this guide, we will explore how to integrate MinIO with .NET applications, providing you with the ability to create, delete, and manage buckets and files seamlessly.</p> <h2 id="setting-up-minio">Setting Up MinIO</h2> <p>Before diving into code, ensure that you have MinIO installed and running. You can use the following Dockerfile to set up MinIO with a client for managing buckets and policies:</p> <h3 id="dockerfile">Dockerfile</h3> <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Use the official MinIO image</span>
+<span class="k">FROM</span><span class="s"> minio/minio:latest</span>
+
+<span class="c"># Set the MinIO data directory (this is where your data will be stored)</span>
+<span class="k">ENV</span><span class="s"> MINIO_VOLUMES="/data"</span>
+
+<span class="c"># Set MinIO access and secret keys</span>
+<span class="k">ENV</span><span class="s"> MINIO_ROOT_USER=&lt;your-access-key&gt; \</span>
+    MINIO_ROOT_PASSWORD=&lt;your-secret-key&gt;
+
+# Expose MinIO API (default port 9000) and console (port 9001)
+<span class="k">EXPOSE</span><span class="s"> 9000 9001</span>
+
+<span class="c"># Download MinIO Client (mc) for managing buckets and policies using curl</span>
+<span class="k">RUN </span>curl <span class="nt">-O</span> https://dl.min.io/client/mc/release/linux-amd64/mc <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">chmod</span> +x mc <span class="se">\
+</span>    <span class="o">&amp;&amp;</span> <span class="nb">mv </span>mc /usr/local/bin/
+
+<span class="c"># Copy the script to create buckets and set policies</span>
+<span class="k">COPY</span><span class="s"> create-buckets.sh /usr/local/bin/create-buckets.sh</span>
+<span class="k">RUN </span><span class="nb">chmod</span> +x /usr/local/bin/create-buckets.sh
+
+<span class="c"># Use bash to handle the script execution</span>
+<span class="k">ENTRYPOINT</span><span class="s"> ["bash", "-c", "/usr/local/bin/create-buckets.sh &amp; minio server /data --console-address :9001"]</span>
+</code></pre></div></div> <h3 id="docker-composeyml">docker-compose.yml</h3> <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: '3.8'
+
+services:
+minio:
+build:
+context: .
+dockerfile: Dockerfile
+ports:
+- "9000:9000"      # MinIO API
+- "9001:9001"      # MinIO Console
+environment:
+MINIO_ROOT_USER: &lt;your-access-key&gt;
+MINIO_ROOT_PASSWORD: &lt;your-secret-key&gt;
+volumes:
+      - minio-data:/data  <span class="c"># Persistent data storage</span>
+
+volumes:
+  minio-data:
+</code></pre></div></div> <h3 id="command-for">Command for</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">--build</span>
+</code></pre></div></div> <p>For the complete code and implementation, you can visit the public repository: <a href="https://github.com/Luqmant51/MinioServerConsoleApp">MinioServerConsoleApp</a>.</p>]]></content><author><name>Usman Jamil Bhatti</name></author><category term="MinIO,"/><category term=".NET,"/><category term="Object"/><category term="Storage"/><summary type="html"><![CDATA[A guide to using MinIO as an object storage solution in .NET applications.]]></summary></entry><entry><title type="html">Automating Go-Releaser with GCP Cloud Build for Artifact Storage</title><link href="https://blog.teamfullstack.io//blog/2024/Gcp-Go-Releaser/" rel="alternate" type="text/html" title="Automating Go-Releaser with GCP Cloud Build for Artifact Storage"/><published>2024-09-09T00:00:00+00:00</published><updated>2024-09-09T00:00:00+00:00</updated><id>https://blog.teamfullstack.io//blog/2024/Gcp-Go-Releaser</id><content type="html" xml:base="https://blog.teamfullstack.io//blog/2024/Gcp-Go-Releaser/"><![CDATA[<h2 id="introduction">Introduction</h2> <p>Continuous integration and continuous delivery (CI/CD) are crucial for modern software development, and automating these processes can save significant time and reduce errors. In this guide, we’ll walk through the steps to run Go-Releaser within Google Cloud Platform (GCP) Cloud Build and upload the generated artifacts into Google Cloud Storage (GCS). Each release version will be organized into its own folder in GCS, making it easy to manage and retrieve specific versions of your software.</p> <h2 id="prerequisites">Prerequisites</h2> <p>Before we get started, ensure you have the following prerequisites in place:</p> <ul> <li><strong>Google Cloud Platform Account</strong>: You need access to a GCP project with billing enabled.</li> <li><strong>Go-Releaser</strong>: Installed on your local machine for initial setup and testing.</li> <li><strong>Google Cloud SDK</strong>: Installed and configured on your machine.</li> <li><strong>Cloud Build API</strong>: Enabled in your GCP project.</li> <li><strong>Google Cloud Storage Bucket</strong>: Created for storing the release artifacts.</li> </ul> <h2 id="setting-up-go-releaser-in-gcp-cloud-build">Setting Up Go-Releaser in GCP Cloud Build</h2> <h3 id="1-create-the-cloud-build-configuration">1. Create the Cloud Build Configuration</h3> <p>First, we’ll define a <code class="language-plaintext highlighter-rouge">cloudbuild.yaml</code> file to automate the build process using GCP Cloud Build. This file describes the steps needed to run Go-Releaser and upload the artifacts.</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">steps</span><span class="pi">:</span>
   <span class="c1"># Step 1: Set up Go environment with Go 1.23.0</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">golang:1.23.0'</span>
     <span class="na">id</span><span class="pi">:</span> <span class="s1">'</span><span class="s">setup-go'</span>
@@ -570,18 +613,4 @@ cd ..
 │   ├── poetry.lock  
 │   └── pyproject.toml  
 └── tree_2.1.1-2_amd64.deb  
-</code></pre></div></div>]]></content><author><name>Zuhaib Sohail</name></author><category term="deployment"/><category term="bazel"/><category term="linux"/><summary type="html"><![CDATA[Setting up your bazel configurations on linux]]></summary></entry><entry><title type="html">Configuring ssh on linux</title><link href="https://blog.teamfullstack.io//blog/2024/install-ssh-linux/" rel="alternate" type="text/html" title="Configuring ssh on linux"/><published>2024-01-24T00:00:00+00:00</published><updated>2024-01-24T00:00:00+00:00</updated><id>https://blog.teamfullstack.io//blog/2024/install-ssh-linux</id><content type="html" xml:base="https://blog.teamfullstack.io//blog/2024/install-ssh-linux/"><![CDATA[<h3 id="generate-keys">Generate Keys</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># use ssh-keygen to generate your rsa keys and save to id_test</span>
-ssh-keygen
-</code></pre></div></div> <h3 id="copy-the-public-key">Copy the public key</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># copy the contents of your public key to the clip-board (macOS)</span>
-<span class="nb">cat </span>id_test.pub | pbcopy
-</code></pre></div></div> <h3 id="install-locally">Install locally</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-add id_test
-</code></pre></div></div> <h3 id="install-on-remote-machine">Install on remote machine</h3> <p>If you connect to the remote machine using VNC then do so.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># install the public key</span>
-<span class="nb">cd</span> ~
-<span class="nb">mkdir</span> .ssh
-<span class="nb">cd</span> .ssh
-<span class="c"># create file authorized_keys</span>
-<span class="nb">touch </span>authorized_keys
-<span class="c"># copy the contents of public key to the file</span>
-<span class="nb">cat </span>id_test.pub <span class="o">&gt;&gt;</span> authorized_keys
-</code></pre></div></div> <h3 id="connect">Connect</h3> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-i</span> id_test root@ip_or_host
-</code></pre></div></div>]]></content><author><name>Usman Jamil Bhatti</name></author><category term="deployment"/><category term="ssh"/><category term="linux"/><summary type="html"><![CDATA[Adding your ssh key to a linux server]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name>Zuhaib Sohail</name></author><category term="deployment"/><category term="bazel"/><category term="linux"/><summary type="html"><![CDATA[Setting up your bazel configurations on linux]]></summary></entry></feed>
